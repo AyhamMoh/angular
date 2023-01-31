@@ -1,0 +1,27 @@
+<div class="container py-5">
+    <form [formGroup]="formContact" class="d-flex flex-column m-3">
+       <mat-form-field class="example-full-width">
+        <mat-label>Titre</mat-label> 
+           <input matInput formControlName="titre"> 
+           <mat-error *ngIf = "formContact.get('titre')?.hasError('required')">Le titre est obligatoire</mat-error> 
+       </mat-form-field>
+    </form>
+
+    <form [formGroup]="formContact" class="d-flex flex-column m-3">
+       <mat-form-field class="example-full-width">
+        <mat-label>Auteur</mat-label> 
+           <input matInput formControlName="auteur"> 
+       </mat-form-field>
+    </form>
+
+    <form [formGroup]="formContact" class="d-flex flex-column m-3">
+       <mat-form-field class="example-full-width">
+        <mat-label>Contenu</mat-label> 
+           <input matInput formControlName="contenu"> 
+           <mat-error *ngIf = "formContact.get('contenu')?.hasError('required')">Le titre est obligatoire</mat-error> 
+       </mat-form-field>
+    </form>
+
+    <button mat-flat-button color="primary" (click)="onSubmit()">Ajouter un article</button> 
+
+</div>
