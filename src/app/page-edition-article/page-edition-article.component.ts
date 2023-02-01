@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-page-edition-article',
   templateUrl: './page-edition-article.component.html',
@@ -9,23 +10,41 @@ import { FormGroup } from '@angular/forms';
 })
 export class PageEditionArticleComponent {
 
-  public formContact: FormGroup = this.formBuilder.group(
+  public formArticle: FormGroup = this.formBuilder.group(
     {
       "titre": ["", [Validators.required]],
-      "auteur": "",
+
+      "auteur": ["", [Validators.maxLength(50)]],
+
       "contenu": ["", [Validators.required]]
     })
 
-  constructor(private router: Router, private formBuilder: NonNullableFormBuilder) { }
+  constructor(
+    private router: Router,
+    private formBuilder: NonNullableFormBuilder,
+    private http: HttpClient) { }
 
 
   onSubmit(): void {
 
-    if (this.formContact.valid) {
-      alert("L'article a été ajouté ...")
-      this.router.navigateByUrl("/accueil")
+    if (this.formArticle.valid) {
+
+      this.http.post("http://localhost:8080/article", this.formArticle.value)
+        .subscribe({
+          next: resultat => {
+            alert("Le formulaire a été envoyé  ...")
+            this.router.navigateByUrl("/accueil")
+          },
+          error: (resultat: HttpErrorResponse) => {
+            if (resultat.status == 400) {
+              alert("Un article porte déjà ce nom")
+            }
+            else {
+              alert("Erreur inconnu")
+            }
+          }
+        })
     }
   }
-
 
 }

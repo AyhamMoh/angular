@@ -25,7 +25,7 @@ export class PageContactComponent {
  
   
   onSubmit() : void{
-   //this.router.navigateByUrl("/accueil")
+  
    
    if(this.formContact.valid){
     alert("Le formulaire a été envoyé ...")

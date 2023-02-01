@@ -1,27 +1,36 @@
-<div class="container py-5">
-    <form [formGroup]="formContact" class="d-flex flex-column m-3">
-       <mat-form-field class="example-full-width">
-        <mat-label>Titre</mat-label> 
-           <input matInput formControlName="titre"> 
-           <mat-error *ngIf = "formContact.get('titre')?.hasError('required')">Le titre est obligatoire</mat-error> 
-       </mat-form-field>
-    </form>
+<div class="container">
 
-    <form [formGroup]="formContact" class="d-flex flex-column m-3">
-       <mat-form-field class="example-full-width">
-        <mat-label>Auteur</mat-label> 
-           <input matInput formControlName="auteur"> 
-       </mat-form-field>
-    </form>
+    <h1>Ajouter un article</h1>
 
-    <form [formGroup]="formContact" class="d-flex flex-column m-3">
-       <mat-form-field class="example-full-width">
-        <mat-label>Contenu</mat-label> 
-           <input matInput formControlName="contenu"> 
-           <mat-error *ngIf = "formContact.get('contenu')?.hasError('required')">Le titre est obligatoire</mat-error> 
-       </mat-form-field>
-    </form>
+    <form [formGroup]="formArticle" class="d-flex flex-column">
 
-    <button mat-flat-button color="primary" (click)="onSubmit()">Ajouter un article</button> 
+        <mat-form-field>
+            <mat-label>Titre</mat-label>
+            <input matInput formControlName="titre">
+            <mat-error>
+                Le titre est obligatoire
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Auteur</mat-label>
+            <input matInput formControlName="auteur">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contenu</mat-label>
+            <textarea matInput formControlName="contenu"></textarea>
+
+            <mat-error>
+                Le contenu est obligatoire
+            </mat-error>
+
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary" (click)="onSubmit()">
+            Envoyer formulaire
+        </button>
+
+    </form>
 
 </div>
